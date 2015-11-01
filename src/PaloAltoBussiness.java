@@ -15,7 +15,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
 public class PaloAltoBussiness {
 
 	public static class Map extends Mapper<LongWritable, Text, Text, Text>{
-		
+
 
 		private Text word = new Text(); // type of output key
 		private Text busId = new Text("busId");
@@ -37,7 +37,7 @@ public class PaloAltoBussiness {
 		private Text busId = new Text("");
 
 		public void reduce(Text key, Iterable<Text> values,Context context) throws IOException, InterruptedException {
-		
+
 			for (Text val : values) {
 				context.write(busId, val);
 			}
@@ -61,8 +61,8 @@ public class PaloAltoBussiness {
 		job.setJarByClass(PaloAltoBussiness.class); 
 
 		job.setMapperClass(Map.class);
-job.setNumReduceTasks(0);
-		//job.setReducerClass(Reduce.class);
+		
+		job.setReducerClass(Reduce.class);
 		job.setOutputKeyClass(Text.class);
 
 		// set output value type 
